@@ -46,7 +46,7 @@ class Chain {
     console.log('⛏️ mining...')
 
     while(true) {
-      const hash = crypto.createHash('MDS');
+      const hash = crypto.createHash('MD5');
       hash.update((nonce + solution).toString()).end();
 
       const attempt = hash.digest('hex');
