@@ -26,6 +26,21 @@ class Block {
 }
 
 class Chain {
+  public static instance = new Chain(); // Singleton instance
+
+  chain: Block[];
+
+  constructor() {
+    this.chain = [new Block(null, new Transaction(100, 'genesis', 'satoshi'))];
+  }
+
+  get lastBlock() {
+    return this.chain[this.chain.length - 1];
+  }
+
+  addBlock(transaction: Transaction, senderPublicKey: string, signature: String) {
+    
+  }
   
 }
 
