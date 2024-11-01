@@ -101,3 +101,10 @@ class Wallet {
     Chain.instance.addBlock(transaction, this.publicKey, signature);
   }
 }
+
+// Example usage
+
+const satoshi = new Wallet();
+const bob = new Wallet();
+const alice = new Wallet();
+
