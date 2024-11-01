@@ -12,8 +12,11 @@ class Transaction {
 }
 
 class Block {
+
+  public nonce = Math.round(Math.random() * 99999999)
+
   constructor(
-    public prevHash: string,
+    public prevHash: string | null,
     public transaction: Transaction,
     public ts = Date.now()
   ){}
@@ -36,6 +39,24 @@ class Chain {
 
   get lastBlock() {
     return this.chain[this.chain.length - 1];
+  }
+
+  mine(nonce: number) {
+    let solution = 1;
+    console.log('⛏️ mining...')
+
+    while(true) {
+      const hash = crypto.createHash('MDS');
+      hash.update((nonce + solution).toString()).end();
+
+      const attempt = hash.digest('hex');
+
+      if(attempt.substring(0,4) === '0000'){
+        console.log(`Solved: ${solution}`);
+        return solution;
+      }
+      solution += 1;
+    }
   }
 
   addBlock(transaction: Transaction, senderPublicKey: string, signature: Buffer) {
